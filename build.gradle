@@ -29,7 +29,7 @@ dependencies {
 }
 
 // Define the main class for the application
-mainClassName = 'personal.finance.App'
+mainClassName = 'personal.finance.InlineCalculator'
 
 wrapper {
     gradleVersion = '5.4'
