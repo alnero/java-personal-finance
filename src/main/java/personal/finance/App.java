@@ -16,7 +16,6 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration
 @ComponentScan("personal.finance")
 public class App {
-
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
     }
