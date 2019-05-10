@@ -1,13 +1,13 @@
 package personal.finance.controller;
 
 import personal.finance.model.User;
+import personal.finance.exception.UserNotFoundException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.LongStream;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +27,11 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "{userId}",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public User updateUser(@PathVariable("userId") Long userId) {
+    public User updateUser(@PathVariable("userId") Long userId) throws UserNotFoundException {
         User user = this.userMap.get(userId);
+        if (user == null) {
+            throw new UserNotFoundException("User with id=" + userId + " not found");
+        }
         user.setUserContent("Some random content which updates user.");
         this.userMap.put(userId, user);
         return user;
