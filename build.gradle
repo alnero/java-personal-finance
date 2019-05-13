@@ -12,6 +12,10 @@ plugins {
 
     // Apply the application plugin to add support for building an application
     id 'application'
+
+    // Spring plugin
+    id 'org.springframework.boot' version '2.1.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.6.RELEASE'
 }
 
 repositories {
@@ -24,12 +28,21 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:27.0.1-jre'
 
+    // Spring Boot MVC
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
 
 // Define the main class for the application
-mainClassName = 'personal.finance.InlineCalculator'
+mainClassName = 'personal.finance.App'
+
+bootJar {
+    baseName = 'personal-finance-service'
+    version = '0.0.1'
+}
 
 wrapper {
     gradleVersion = '5.4'
