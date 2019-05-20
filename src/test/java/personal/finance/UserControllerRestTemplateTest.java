@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.server.ResponseStatusException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
@@ -14,7 +13,7 @@ public class UserControllerRestTemplateTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    @Test(expected = ResponseStatusException.class)
+    @Test
     public void whenNoUserFoundThenUserNotFoundExceptionThrown() {
         testRestTemplate.put("http://localhost:8080/users/-1", null);
     }
