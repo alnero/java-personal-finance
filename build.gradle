@@ -34,6 +34,15 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
+    //Hiberante
+    implementation 'org.hibernate:hibernate-core:5.4.2.Final'
+
+    //Postgresql
+    implementation 'org.postgresql:postgresql:42.2.5'
+
+    //Hibernate-entitymanager
+    implementation 'org.hibernate:hibernate-entitymanager:5.4.2.Final'
 }
 
 // Define the main class for the application
