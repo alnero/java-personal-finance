@@ -1,4 +1,4 @@
-package personal.finance;
+package personalFinance;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

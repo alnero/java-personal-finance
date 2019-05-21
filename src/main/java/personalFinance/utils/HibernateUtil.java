@@ -1,4 +1,4 @@
-package personal.finance.utils;
+package personalFinance.utils;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

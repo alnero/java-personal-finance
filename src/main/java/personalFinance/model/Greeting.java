@@ -1,4 +1,4 @@
-package personal.finance.model;
+package personalFinance.model;
 
 public class Greeting {
     private final long id;

@@ -1,15 +1,12 @@
-package personal.finance.controller;
+package personalFinance.controller;
 
-import personal.finance.model.User;
-import personal.finance.exception.UserNotFoundException;
-import java.util.Collection;
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import personalFinance.exception.UserNotFoundException;
+import personalFinance.model.User;
+
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 @RequestMapping("/users")
@@ -26,13 +23,13 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "{userId}",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "{userId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public User updateUser(@PathVariable("userId") Long userId) throws UserNotFoundException {
         User user = this.userMap.get(userId);
         if (user == null) {
             throw new UserNotFoundException("User with id=" + userId + " not found");
         }
-        user.setUserContent("Some random content which updates user.");
+        user.setName("Some random content which updates user.");
         this.userMap.put(userId, user);
         return user;
     }
@@ -48,7 +45,7 @@ public class UserController {
 
 
     @ResponseBody
-    @RequestMapping(value = "{userId}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "{userId}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable("userId") Long userId) {
         this.userMap.remove(userId);
     }
