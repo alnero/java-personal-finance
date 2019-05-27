@@ -6,5 +6,5 @@ import personalFinance.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findUserById(Long id);
+    User findUserByUserId(Long id);
 }
