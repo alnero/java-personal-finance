@@ -28,20 +28,21 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:27.0.1-jre'
 
-    // Spring Boot MVC
+    // Spring Boot MVC, Spring Data, Spring Test
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.1.2.RELEASE'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 
-    //Hiberante
+    // Hiberante
     implementation 'org.hibernate:hibernate-core:5.4.2.Final'
 
-    //Postgresql
+    // Postgresql
     implementation 'org.postgresql:postgresql:42.2.5'
 
-    //Hibernate-entitymanager
+    // Hibernate-entitymanager
     implementation 'org.hibernate:hibernate-entitymanager:5.4.2.Final'
 }
 
