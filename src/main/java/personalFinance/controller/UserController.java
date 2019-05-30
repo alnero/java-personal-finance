@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import personalFinance.model.User;
 import personalFinance.repository.UserRepository;
 import personalFinance.utils.UserDTO;
-
 import java.util.*;
 
 @RestController
