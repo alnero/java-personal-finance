@@ -9,19 +9,28 @@ public class Expense {
     @Id
     @SequenceGenerator(name = "expenses_seq", sequenceName = "expenses_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expenses_seq")
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name="user_id"),
+            @JoinColumn(name="category_id")
+    })
     private long expenseId;
 
-    @NotNull(message = "category of expense can't be empty")
-    @Column(name = "category")
-    private long expenseCategory;
+    @NotNull(message = "category id of expense can't be empty")
+    @Column(name = "category_id")
+    @ManyToOne
+    private long categoryId;
 
-    @NotNull(message = "user of expense can't be empty")
+    @NotNull(message = "user id of expense can't be empty")
     @Column(name = "user_id")
+    @ManyToOne
     private long userId;
 
-    public Expense(@NotNull(message = "category of expense can't be empty") long expenseCategory, @NotNull(message = "user of expense can't be empty") long userId) {
-        this.expenseCategory = expenseCategory;
-        this.userId = userId;
+    public Expense() {}
+
+    public Expense(@NotNull(message = "category id of expense can't be empty") long expenseCategoryId, @NotNull(message = "user of expense can't be empty") long expenseUserId) {
+        this.categoryId = expenseCategoryId;
+        this.userId = expenseUserId;
     }
 
     public long getExpenseId() {
@@ -29,11 +38,11 @@ public class Expense {
     }
 
     public long getExpenseCategory() {
-        return expenseCategory;
+        return categoryId;
     }
 
     public void setExpenseCategory(long expenseCategory) {
-        this.expenseCategory = expenseCategory;
+        this.categoryId = expenseCategory;
     }
 
     public long getUserId() {

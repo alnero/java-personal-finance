@@ -9,14 +9,14 @@ public class User {
     @Id
     @SequenceGenerator(name = "users_seq", sequenceName = "users_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @OneToMany
     private long userId;
 
     @NotNull(message = "content of user can't be empty")
     @Column(name = "content", length = 256)
     private String name;
 
-    public User() {
-    }
+    public User() {}
 
     public User(@NotNull(message = "content of user can't be empty") String name) {
         this.name = name;
