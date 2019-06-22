@@ -18,12 +18,10 @@ public class Expense {
 
     @NotNull(message = "category id of expense can't be empty")
     @Column(name = "category_id")
-    @ManyToOne
     private long categoryId;
 
     @NotNull(message = "user id of expense can't be empty")
     @Column(name = "user_id")
-    @ManyToOne
     private long userId;
 
     public Expense() {}
