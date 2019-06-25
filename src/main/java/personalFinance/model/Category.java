@@ -1,41 +1,45 @@
 package personalFinance.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "category")
 public class Category {
     @Id
-    @SequenceGenerator(name = "categories_seq", sequenceName = "categories_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categories_seq")
-    @OneToMany
-    private long categoryId;
+    @SequenceGenerator(name = "category_seq", sequenceName = "category_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
+    private long id;
 
-    @NotNull(message = "category name can't be empty")
-    @Column(name = "category_name", length = 256)
-    private String categoryName;
+    @NotNull(message = "name of category can't be empty")
+    @Column(name = "name", length = 256)
+    private String name;
 
-    public Category() {}
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    @Column(name = "category_id")
+    private List<Expense> expenses;
 
-    public Category(@NotNull(message = "category name can't be empty") String categoryName) {
-        this.categoryName = categoryName;
+    public Category() {
     }
 
-    public Category(long categoryId, @NotNull(message = "category name can't be empty") String categoryName) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
+    public Category(String name) {
+        this.name = name;
     }
 
-    public long getCategoryId() {
-        return categoryId;
+    public long getId() {
+        return id;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+
+    public String getName() {
+        return name;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 }

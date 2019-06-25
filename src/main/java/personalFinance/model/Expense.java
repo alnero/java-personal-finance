@@ -1,67 +1,69 @@
 package personalFinance.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "expenses")
+@Table(name = "expence")
 public class Expense {
     @Id
-    @SequenceGenerator(name = "expenses_seq", sequenceName = "expenses_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expenses_seq")
-    @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name="user_id"),
-            @JoinColumn(name="category_id")
-    })
-    private long expenseId;
+    @SequenceGenerator(name = "expence_seq", sequenceName = "expence_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expence_seq")
+    private long id;
 
-    @NotNull(message = "category id of expense can't be empty")
-    @Column(name = "category_id")
-    private long categoryId;
+    @JsonIgnore
+    @NotNull(message = "category can't be empty")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")//вопрос
+    private Category category;
 
-    @NotNull(message = "user id of expense can't be empty")
-    @Column(name = "user_id")
-    private long userId;
+    @JsonIgnore
+    //  @NotNull(message = "user can't be empty")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    @NotNull(message = "amount can't be empty")
     @Column(name = "amount")
-    private long amount;
+    private BigDecimal amount;
 
-    public Expense() {}
+    public Expense() {
+    }
 
-    public Expense(@NotNull(message = "category id of expense can't be empty") long expenseCategoryId,
-                   @NotNull(message = "user of expense can't be empty") long expenseUserId,
-                   long amount) {
-        this.categoryId = expenseCategoryId;
-        this.userId = expenseUserId;
+    public Expense(@NotNull(message = "category can't be empty") Category category, @NotNull(message = "user can't be empty") User user, @NotNull(message = "amount can't be empty") BigDecimal amount) {
+        this.category = category;
+        this.user = user;
         this.amount = amount;
     }
 
-    public long getExpenseId() {
-        return expenseId;
+    public long getId() {
+        return id;
     }
 
-    public long getExpenseCategory() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setExpenseCategory(long expenseCategory) {
-        this.categoryId = expenseCategory;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public long getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }

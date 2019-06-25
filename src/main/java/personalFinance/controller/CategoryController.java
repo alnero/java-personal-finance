@@ -31,14 +31,14 @@ public class CategoryController {
     @ResponseBody
     @GetMapping(value = "/{id}")
     public Category getCategoryById(@PathVariable(name = "id") Long id) {
-        Category category = this.categoryRepository.findCategoryByCategoryId(id);
+        Category category = this.categoryRepository.findCategoriesById(id);
         return category;
     }
 
     @ResponseBody
     @PutMapping(value = "/{id}")
     public Category updateCategoryById(@PathVariable(value = "id") Long id, @RequestBody CategoryDTO categoryDTO) {
-        Category category = this.categoryRepository.findCategoryByCategoryId(id);
+        Category category = this.categoryRepository.findCategoriesById(id);
         this.modelMapper.map(categoryDTO, category);
         category = this.categoryRepository.save(category);
         return category;

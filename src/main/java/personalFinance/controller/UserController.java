@@ -30,14 +30,14 @@ public class UserController {
     @ResponseBody
     @GetMapping(value = "/{id}")
     public User getUserById(@PathVariable(value = "id") Long id) {
-        User user = this.userRepository.findUserByUserId(id);
+        User user = this.userRepository.findUserById(id);
         return user;
     }
 
     @ResponseBody
     @PutMapping(value = "/{id}")
     public User updateUserById(@PathVariable(value = "id") Long id, @RequestBody UserDTO userDTO) {
-        User user = this.userRepository.findUserByUserId(id);
+        User user = this.userRepository.findUserById(id);
         modelMapper.map(userDTO, user);
         user = this.userRepository.save(user);
         return user;

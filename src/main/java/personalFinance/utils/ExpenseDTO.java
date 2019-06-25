@@ -1,20 +1,12 @@
 package personalFinance.utils;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class ExpenseDTO implements Serializable {
-    private long expenseId;
     private long categoryId;
     private long userId;
-    private long amount;
-
-    public long getExpenseId() {
-        return expenseId;
-    }
-
-    public void setExpenseId(long expenseId) {
-        this.expenseId = expenseId;
-    }
+    private BigDecimal amount;
 
     public long getCategoryId() {
         return categoryId;
@@ -32,11 +24,11 @@ public class ExpenseDTO implements Serializable {
         this.userId = userId;
     }
 
-    public long getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }
