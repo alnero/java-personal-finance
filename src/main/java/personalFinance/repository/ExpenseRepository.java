@@ -5,4 +5,5 @@ import personalFinance.model.Expense;
 
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     Expense findExpenseByCategoryIdAndAndUserId(Long categoryId, Long userId);
+    void deleteByCategoryIdAndUserId(Long categoryId, Long userId);
 }

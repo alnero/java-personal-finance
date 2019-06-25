@@ -24,11 +24,17 @@ public class Expense {
     @Column(name = "user_id")
     private long userId;
 
+    @Column(name = "amount")
+    private long amount;
+
     public Expense() {}
 
-    public Expense(@NotNull(message = "category id of expense can't be empty") long expenseCategoryId, @NotNull(message = "user of expense can't be empty") long expenseUserId) {
+    public Expense(@NotNull(message = "category id of expense can't be empty") long expenseCategoryId,
+                   @NotNull(message = "user of expense can't be empty") long expenseUserId,
+                   long amount) {
         this.categoryId = expenseCategoryId;
         this.userId = expenseUserId;
+        this.amount = amount;
     }
 
     public long getExpenseId() {
@@ -49,5 +55,13 @@ public class Expense {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
     }
 }

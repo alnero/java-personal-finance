@@ -35,4 +35,33 @@ public class ExpenseController {
         Expense expense = this.expenseRepository.findExpenseByCategoryIdAndAndUserId(categoryId, userId);
         return expense;
     }
+
+    @ResponseBody
+    @PutMapping
+    public Expense updateExpenseByCategoryIdAndUserId(@RequestBody ExpenseDTO expenseDTO) {
+        Long categoryId = expenseDTO.getCategoryId();
+        Long userId = expenseDTO.getUserId();
+        Expense expense = this.expenseRepository.findExpenseByCategoryIdAndAndUserId(categoryId, userId);
+        this.modelMapper.map(expenseDTO, expense);
+        return expense;
+    }
+
+    @ResponseBody
+    @DeleteMapping
+    public void deleteExpenseByCategoryIdAndUserId(@RequestBody ExpenseDTO expenseDTO) {
+        Long categoryId = expenseDTO.getCategoryId();
+        Long userId = expenseDTO.getUserId();
+        this.expenseRepository.deleteByCategoryIdAndUserId(categoryId, userId);
+    }
+
+    @ResponseBody
+    @PostMapping
+    public Expense createExpense(@RequestBody ExpenseDTO expenseDTO) {
+        Long categoryId = expenseDTO.getCategoryId();
+        Long userId = expenseDTO.getUserId();
+        Long amount = expenseDTO.getAmount();
+        Expense expense = new Expense(categoryId, userId, amount);
+        expense = this.expenseRepository.save(expense);
+        return expense;
+    }
 }

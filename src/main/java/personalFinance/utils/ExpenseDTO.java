@@ -6,6 +6,7 @@ public class ExpenseDTO implements Serializable {
     private long expenseId;
     private long categoryId;
     private long userId;
+    private long amount;
 
     public long getExpenseId() {
         return expenseId;
@@ -29,5 +30,13 @@ public class ExpenseDTO implements Serializable {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
     }
 }
