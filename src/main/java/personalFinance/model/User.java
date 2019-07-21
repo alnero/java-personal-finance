@@ -21,8 +21,12 @@ public class User {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    @Column(name = "user_id")
+//    @Column(name = "user_id")
     private List<Expense> expenses;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Arrival> arrivals;
 
     public User() {
     }

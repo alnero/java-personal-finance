@@ -7,17 +7,17 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "expence")
+@Table(name = "expense")
 public class Expense {
     @Id
-    @SequenceGenerator(name = "expence_seq", sequenceName = "expence_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expence_seq")
+    @SequenceGenerator(name = "expense_seq", sequenceName = "expense_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_seq")
     private long id;
 
     @JsonIgnore
     @NotNull(message = "category can't be empty")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")//вопрос
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @JsonIgnore
