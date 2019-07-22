@@ -1,11 +1,12 @@
 package personalFinance.controller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import personalFinance.model.User;
 import personalFinance.repository.UserRepository;
-
-import java.util.List;
+import personalFinance.utils.UserDTO;
+import java.util.*;
 
 @RestController
 @RequestMapping("/users")
@@ -17,6 +18,8 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
+    private ModelMapper modelMapper = new ModelMapper();
+
     @ResponseBody
     @GetMapping
     public List<User> getAllUsers() {
@@ -27,15 +30,15 @@ public class UserController {
     @ResponseBody
     @GetMapping(value = "/{id}")
     public User getUserById(@PathVariable(value = "id") Long id) {
-        User user = this.userRepository.findUserByUserId(id);
+        User user = this.userRepository.findUserById(id);
         return user;
     }
 
     @ResponseBody
     @PutMapping(value = "/{id}")
-    public User updateUserById(@PathVariable(value = "id") Long id, @RequestBody String content) {
-        User user = this.userRepository.findUserByUserId(id);
-        user.setName(content);
+    public User updateUserById(@PathVariable(value = "id") Long id, @RequestBody UserDTO userDTO) {
+        User user = this.userRepository.findUserById(id);
+        modelMapper.map(userDTO, user);
         user = this.userRepository.save(user);
         return user;
     }
@@ -48,8 +51,9 @@ public class UserController {
 
     @ResponseBody
     @PostMapping
-    public User createUser(@RequestBody String content) {
-        User user = new User(content);
+    public User createUser(@RequestBody UserDTO userDTO) {
+        User user = new User();
+        modelMapper.map(userDTO, user);
         user = this.userRepository.save(user);
         return user;
     }

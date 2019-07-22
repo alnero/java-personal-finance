@@ -44,6 +44,9 @@ dependencies {
 
     // Hibernate-entitymanager
     implementation 'org.hibernate:hibernate-entitymanager:5.4.2.Final'
+    
+    // Model Mapper
+    implementation 'org.modelmapper:modelmapper:2.3.0'
 }
 
 // Define the main class for the application
