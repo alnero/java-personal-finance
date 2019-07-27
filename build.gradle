@@ -50,7 +50,7 @@ dependencies {
 }
 
 // Define the main class for the application
-mainClassName = 'personal.finance.App'
+mainClassName = 'personalFinance.App'
 
 bootJar {
     baseName = 'personal-finance-service'

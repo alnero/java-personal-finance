@@ -3,8 +3,8 @@ package personalFinance.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import personalFinance.model.User;
-import personalFinance.repository.UserRepository;
+import personalFinance.model.*;
+import personalFinance.repository.*;
 import personalFinance.utils.UserDTO;
 import java.util.*;
 
@@ -12,10 +12,16 @@ import java.util.*;
 @RequestMapping("/users")
 public class UserController {
     private UserRepository userRepository;
+    private ArrivalRepository arrivalRepository;
+    private ExpenseRepository expenseRepository;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository,
+                          ArrivalRepository arrivalRepository,
+                          ExpenseRepository expenseRepository) {
         this.userRepository = userRepository;
+        this.arrivalRepository = arrivalRepository;
+        this.expenseRepository = expenseRepository;
     }
 
     private ModelMapper modelMapper = new ModelMapper();
@@ -25,6 +31,17 @@ public class UserController {
     public List<User> getAllUsers() {
         List<User> users = this.userRepository.findAll();
         return users;
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/all/{id}")
+    public List<Object> getArrivalAndExpenceById(@PathVariable(value = "id") Long id) {
+        List<Object> results = new ArrayList<>();
+        List<Arrival> arrivals = this.arrivalRepository.findAllByUserId(id);
+        List<Expense> expenses = this.expenseRepository.findAllByUserId(id);
+        results.addAll(arrivals);
+        results.addAll(expenses);
+        return results;
     }
 
     @ResponseBody
