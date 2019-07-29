@@ -13,13 +13,12 @@ import java.util.List;
 @RequestMapping("/categories")
 public class CategoryController {
     private CategoryRepository categoryRepository;
+    private ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
     public CategoryController(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
-
-    private ModelMapper modelMapper = new ModelMapper();
 
     @ResponseBody
     @GetMapping

@@ -3,7 +3,6 @@ package personalFinance.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -54,5 +53,13 @@ public class User {
 
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    public List<Arrival> getArrivals() {
+        return arrivals;
+    }
+
+    public void setArrivals(List<Arrival> arrivals) {
+        this.arrivals = arrivals;
     }
 }

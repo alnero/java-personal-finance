@@ -3,28 +3,26 @@ package personalFinance.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import personalFinance.model.*;
-import personalFinance.repository.*;
+import personalFinance.model.MoneyFlow;
+import personalFinance.model.User;
+import personalFinance.repository.MoneyFlowRepository;
+import personalFinance.repository.UserRepository;
 import personalFinance.utils.UserDTO;
-import java.util.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
     private UserRepository userRepository;
-    private ArrivalRepository arrivalRepository;
-    private ExpenseRepository expenseRepository;
+    private MoneyFlowRepository moneyFlowRepository;
+    private ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
-    public UserController(UserRepository userRepository,
-                          ArrivalRepository arrivalRepository,
-                          ExpenseRepository expenseRepository) {
+    public UserController(UserRepository userRepository, MoneyFlowRepository moneyFlowRepository) {
         this.userRepository = userRepository;
-        this.arrivalRepository = arrivalRepository;
-        this.expenseRepository = expenseRepository;
+        this.moneyFlowRepository = moneyFlowRepository;
     }
-
-    private ModelMapper modelMapper = new ModelMapper();
 
     @ResponseBody
     @GetMapping
@@ -35,12 +33,9 @@ public class UserController {
 
     @ResponseBody
     @GetMapping(value = "/all/{id}")
-    public List<Object> getArrivalAndExpenceById(@PathVariable(value = "id") Long id) {
-        List<Object> results = new ArrayList<>();
-        List<Arrival> arrivals = this.arrivalRepository.findAllByUserId(id);
-        List<Expense> expenses = this.expenseRepository.findAllByUserId(id);
-        results.addAll(arrivals);
-        results.addAll(expenses);
+    public List<MoneyFlow> getArrivalAndExpenceById(@PathVariable(value = "id") Long id) {
+        User user = this.userRepository.findUserById(id);
+        List<MoneyFlow> results = this.moneyFlowRepository.findAllByUserId(id);
         return results;
     }
 

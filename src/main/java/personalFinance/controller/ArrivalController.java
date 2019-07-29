@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/arrivals")
-public class ArrivalController  {
+public class ArrivalController {
     private UserRepository userRepository;
     private ArrivalRepository arrivalRepository;
     private ModelMapper modelMapper = new ModelMapper();

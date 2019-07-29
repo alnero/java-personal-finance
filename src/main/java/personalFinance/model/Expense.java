@@ -8,11 +8,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "expense")
-public class Expense {
-    @Id
-    @SequenceGenerator(name = "expense_seq", sequenceName = "expense_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_seq")
-    private long id;
+public class Expense extends MoneyFlow {
 
     @JsonIgnore
     @NotNull(message = "category can't be empty")
@@ -20,27 +16,18 @@ public class Expense {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @JsonIgnore
-    //  @NotNull(message = "user can't be empty")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @NotNull(message = "amount can't be empty")
     @Column(name = "amount")
     private BigDecimal amount;
 
     public Expense() {
+        super();
     }
 
     public Expense(@NotNull(message = "category can't be empty") Category category, @NotNull(message = "user can't be empty") User user, @NotNull(message = "amount can't be empty") BigDecimal amount) {
+        super(user);
         this.category = category;
-        this.user = user;
         this.amount = amount;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public Category getCategory() {
@@ -49,14 +36,6 @@ public class Expense {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public User getUser() {
-        return this.user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public BigDecimal getAmount() {
