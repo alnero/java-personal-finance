@@ -3,6 +3,7 @@ package personalFinance.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -17,11 +18,15 @@ public abstract class MoneyFlow {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
+
     MoneyFlow() {
     }
 
     MoneyFlow(User user) {
         this.user = user;
+        this.creationDate = new Date();
     }
 
     public long getId() {

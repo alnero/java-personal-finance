@@ -2,6 +2,7 @@ package personalFinance.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import personalFinance.model.MoneyFlow;
 import personalFinance.model.User;
@@ -9,6 +10,7 @@ import personalFinance.repository.MoneyFlowRepository;
 import personalFinance.repository.UserRepository;
 import personalFinance.utils.UserDTO;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -33,9 +35,15 @@ public class UserController {
 
     @ResponseBody
     @GetMapping(value = "/all/{id}")
-    public List<MoneyFlow> getArrivalAndExpenceById(@PathVariable(value = "id") Long id) {
-        User user = this.userRepository.findUserById(id);
+    public List<MoneyFlow> getArrivalAndExpenseById(@PathVariable(value = "id") Long id) {
         List<MoneyFlow> results = this.moneyFlowRepository.findAllByUserId(id);
+        return results;
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/all/date/{date}")
+    public List<MoneyFlow> getArrivalAndExpenseByDate(@PathVariable(value = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+        List<MoneyFlow> results = this.moneyFlowRepository.findAllByCreationDate(date);
         return results;
     }
 
